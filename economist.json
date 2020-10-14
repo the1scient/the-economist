@@ -1,0 +1,13 @@
+{
+  "token": "",
+  "join_message": "Olá! Eu sou o Economista 🌟",
+  "owners": [
+      ],
+  "prefix": [
+    "$"
+  ],
+  "playing": "$invite|$help|$ping",
+  "playing_type": "playing|watching|listening",
+  "status_type": "online|idle|dnd",
+  "version": "0.1"
+}
