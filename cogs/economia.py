@@ -81,7 +81,11 @@ class Economia(commands.Cog):
             opentime = data["results"][search]["market_time"]["open"]
             closetime = data["results"][search]["market_time"]["close"]
             embedVar = discord.Embed(title=name + " - Informações de Ação", color=0x00ff00)
-            embedVar.set_thumbnail(url="https://image.shutterstock.com/image-photo/stock-forex-trading-indicator-on-260nw-1720647160.jpg")
+            printurl = 'https://shot.screenshotapi.net/screenshot?token=2DV3E1R-BKG483B-P0A674B-97VWWBX&url=https://br.tradingview.com/chart/?symbol=BMFBOVESPA%3A'+search+'&output=json&file_type=png&wait_for_event=load'
+            responsePrint = requests.get(printurl, verify=True)
+            dataPrint = responsePrint.json()
+            screenshot = dataPrint['screenshot']
+            embedVar.set_thumbnail(url=screenshot)
             embedVar.add_field(name="Nome", value=name)
             embedVar.add_field(name="Região", value=region)
             embedVar.add_field(name="Moeda", value=currency)
@@ -89,8 +93,8 @@ class Economia(commands.Cog):
             embedVar.add_field(name="Abertura", value=opentime)
             embedVar.add_field(name="Fechamento", value=closetime)
             embedVar.add_field(name="Última atualização", value=atualizacao)
+            embedVar.add_field(name="Símbolo", value=data["results"][search]["symbol"])
             embedVar.add_field(name="Gráfico TradingView", value="https://br.tradingview.com/symbols/BMFBOVESPA-"+search+"/")
-
 
                 
         await message.edit(content="<:verificacao:732675855440019538> **Busca realizada**! Exibindo resultados. \n", embed=embedVar)

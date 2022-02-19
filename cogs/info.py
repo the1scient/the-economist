@@ -2,6 +2,9 @@ import time
 import discord
 import psutil
 import os
+import requests
+import json
+import re
 
 from datetime import datetime
 from discord.ext import commands
@@ -37,6 +40,23 @@ class Informacao(commands.Cog):
             await ctx.send("DM's bloqueados para este usuário.")
 
    
+
+    @commands.command(aliases=['printar', 'printsite'])
+    async def screenshot(self, ctx, link: str):
+         async with ctx.channel.typing():
+            message = await ctx.send("<a:loading:732671405816152105> Carregando resultados :dollar:")
+            url = 'https://shot.screenshotapi.net/screenshot?&url='+link+'&output=json&file_type=png&wait_for_event=load'
+            response = requests.get(url, verify=True) 
+            data = response.json()
+            screenshot = data['screenshot']
+
+            embedVar = discord.Embed(title="Print de site" + link, color=0x00ff00)
+            embedVar.set_thumbnail(url=screenshot)
+            embedVar.add_field(name="Site", value=link)
+                
+            await message.edit(content="<:verificacao:732675855440019538> **Print gerado**! Exibindo resultados. \n", embed=embedVar)
+       
+
 
     @commands.command(aliases=['servidor', 'feedbackserver'])
     async def botserver(self, ctx):

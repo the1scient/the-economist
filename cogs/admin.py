@@ -102,7 +102,7 @@ class Admin(commands.Cog):
     @commands.check(permissions.is_owner)
     async def desligar(self, ctx):
         """ Desliga o BOT """
-        await ctx.send('Desligando as tubinas econômicas...')
+        await ctx.send('Desligando as turbinas econômicas...')
         time.sleep(1)
         sys.exit(0)
 
